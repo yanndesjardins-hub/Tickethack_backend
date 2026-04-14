@@ -11,8 +11,9 @@ router.get('/', function (req, res) {
 
 router.post('/', function (req, res) {
     const { departure, arrival } = req.body
-    Trip.find({ departure, arrival }).then(data =>
+    Trip.find({ departure, arrival }).then(data => 
         res.json(data)
+    
     )
 })
 router.post('/departure', function (req, res) {
