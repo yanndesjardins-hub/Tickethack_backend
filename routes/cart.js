@@ -20,13 +20,29 @@ router.get('/:id', function (req, res) {
             res.json(data)
         )
 })
-router.post('/', function (req, res) {
-    let CartId = '69dea1d88a42a5ab42754cf9'
+router.post('/content', function (req, res) {
+    const { cartId } = req.body;
     const { id } = req.body;
     Trip.findById(id)
-        .then(data => { Cart.findByIdAndUpdate('69dea1d88a42a5ab42754cf9', { trips: data }) })
+        .then(data => {
+            Cart.findByIdAndUpdate(cartId, { $push: { trips: [data] } }).then(data => res.json(data)
+            )
+        })
 
 })
+
+router.delete('/content', function (req, res) {
+    const { cartId } = req.body;
+    const { id } = req.body;
+    Trip.findById(id)
+        .then(() => {
+            Cart.findByIdAndUpdate(cartId, { $pull: { trips: id } }).then(data => res.json(data)
+            )
+            
+        })
+})
+
+
 
 module.exports = router;
 //69de0bfe475b44cb89d6ecab

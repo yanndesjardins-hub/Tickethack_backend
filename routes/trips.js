@@ -5,7 +5,7 @@ require('../models/connection');
 const Trip = require('../models/tripSchema');
 
 router.post('/', function (req, res) {
-    const { departure, arrival, date } = req.body
+    const { departure, arrival, date, id} = req.body
     let dayPlusOne = new Date(date)
     dayPlusOne = new Date(dayPlusOne.setDate(dayPlusOne.getDate() + 1))
     if ((departure === undefined) || (arrival === undefined) || (date === undefined)) { res.json("error"); return }
