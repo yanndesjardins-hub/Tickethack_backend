@@ -5,16 +5,16 @@ require('../models/connection');
 const Cart = require('../models/cartSchema');
 const Trip = require('../models/tripSchema');
 
-router.post('/', function (req, res) {
+router.post('/mycart', function (req, res) {
     new Cart({
     }).save().then(data => {
         res.json({ id: data.id, trips: data.trips })
     })
 })
 
-router.get('/:id', function (req, res) {
-    const { id } = req.params
-    Cart.findById(id)
+router.get('/:cartId', function (req, res) {
+    const { cartId } = req.params
+    Cart.findById(cartId)
         .populate("trips")
         .then(data =>
             res.json(data)
