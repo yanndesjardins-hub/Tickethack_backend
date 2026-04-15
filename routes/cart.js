@@ -18,8 +18,13 @@ router.get('/:id', function (req, res) {
         .populate("trips")
         .then(data =>
             res.json(data)
-
         )
+})
+router.post('/', function (req, res) {
+    let CartId = '69dea1d88a42a5ab42754cf9'
+    const { id } = req.body;
+    Trip.findById(id)
+        .then(data => { Cart.findByIdAndUpdate('69dea1d88a42a5ab42754cf9', { trips: data }) })
 
 })
 
