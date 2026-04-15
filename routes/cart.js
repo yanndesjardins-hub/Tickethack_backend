@@ -31,14 +31,14 @@ router.post('/content', function (req, res) {
 
 })
 
-router.delete('/content', function (req, res) {
-    const { cartId } = req.body;
+router.post('/:cartId', function (req, res) {
     const { id } = req.body;
+    const { cartId } = req.params;
     Trip.findById(id)
         .then(() => {
             Cart.findByIdAndUpdate(cartId, { $pull: { trips: id } }).then(data => res.json(data)
             )
-            
+
         })
 })
 
